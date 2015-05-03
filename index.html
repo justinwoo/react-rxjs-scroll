@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React RxJS scroll</title>
+    <style type="text/css" media="all">
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Helvetica, arial, freesans, clean, sans-serif;
+      }
+      .phonebook {
+        position: relative;
+        /* draw fake row bg colors with css */
+        background-image: linear-gradient(#f3f3f3 50%, transparent 50%, transparent);
+        background-size: 60px 60px; /* twice the height of a row, since the pattern spans two rows */
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .phonebook li {
+        position: absolute;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        color: #999;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      Root component mounts here.
+    </div>
+    <script src="build/index.js"></script>
+  </body>
+</html>
