@@ -1,15 +1,15 @@
 var Rx = require('rx');
 var React = require('react');
 
-var getScrollY = function () {
-  return window.scrollY;
+var getYOffset = function () {
+  return window.pageYOffset;
 };
 
 var initialScrollSubject = (new Rx.ReplaySubject(1));
-initialScrollSubject.onNext(getScrollY());
+initialScrollSubject.onNext(getYOffset());
 
-var scrollYStream = initialScrollSubject.merge(
-  Rx.Observable.fromEvent(window, 'scroll').map(getScrollY)
+var yOffsetStream = initialScrollSubject.merge(
+  Rx.Observable.fromEvent(window, 'scroll').map(getYOffset)
 );
 
 var getWindowHeight = function () {
@@ -60,7 +60,7 @@ var Phonebook = React.createClass({
   componentDidMount: function () {
     var {rowHeight, totalResults} = this.props;
 
-    var firstVisibleRowStream = scrollYStream.map(function (y) {
+    var firstVisibleRowStream = yOffsetStream.map(function (y) {
       return Math.floor(y / rowHeight);
     }).distinctUntilChanged();
 
@@ -98,7 +98,7 @@ React.render(
   <Phonebook
     totalResults={10000}
     rowHeight={30}
-    scrollYStream={scrollYStream}
+    yOffsetStream={yOffsetStream}
     windowHeightStream={windowHeightStream}
   />,
   document.getElementById('app')
